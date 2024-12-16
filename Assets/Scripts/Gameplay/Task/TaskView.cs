@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace Gameplay.Task
@@ -11,6 +12,8 @@ namespace Gameplay.Task
         public void UpdateText(string text)
         {
             _taskText.text = text;
+            _taskText.alpha = 0; 
+            _taskText.DOFade(1, 4f); 
         }
     }
 }

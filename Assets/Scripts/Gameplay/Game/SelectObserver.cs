@@ -36,7 +36,7 @@ namespace Gameplay.Game
             else
             {
                 Debug.Log("NOT OK");
-                //animation
+                card.ShakeAnimation();
             }
         }
 

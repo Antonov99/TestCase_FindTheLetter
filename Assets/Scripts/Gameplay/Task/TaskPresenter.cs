@@ -1,7 +1,6 @@
 ﻿using System;
 using Gameplay.Cards;
 using JetBrains.Annotations;
-using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Task

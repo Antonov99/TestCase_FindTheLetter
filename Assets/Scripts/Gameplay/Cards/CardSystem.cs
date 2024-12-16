@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Gameplay.Cards
@@ -43,7 +42,8 @@ namespace Gameplay.Cards
             do
             {
                 letterIndex = Random.Range(0, card.LettersCount);
-            } while (_activeLetters.Contains(letterIndex));
+            } 
+            while (_activeLetters.Contains(letterIndex));
 
             card.SetBackground(bgIndex);
             card.SetLetter(letterIndex);

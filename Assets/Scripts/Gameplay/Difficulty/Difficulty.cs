@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Gameplay.Difficulty
+﻿namespace Gameplay.Difficulty
 {
     using System;
     using JetBrains.Annotations;
