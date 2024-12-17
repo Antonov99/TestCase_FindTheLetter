@@ -1,9 +1,10 @@
 ﻿using System;
 using Gameplay.Difficulty;
+using Gameplay.Game;
 using JetBrains.Annotations;
 using Zenject;
 
-namespace Gameplay.Game
+namespace Gameplay.GameOver
 {
     [UsedImplicitly]
     public class GameOverPresenter : IInitializable, IDisposable
@@ -28,7 +29,7 @@ namespace Gameplay.Game
         {
             _gameOverView.Hide();
             _difficulty.SetDifficulty(1);
-            
+
             _gameOverView.OnRestart -= OnRestart;
         }
 
@@ -42,7 +43,7 @@ namespace Gameplay.Game
         {
             _gameOverView.Show();
             _selectObserver.OnCorrectSelected -= OnGameOver;
-            
+
             _gameOverView.OnRestart += OnRestart;
         }
 
@@ -50,7 +51,7 @@ namespace Gameplay.Game
         {
             _difficulty.OnStateChanged -= CheckGameOver;
             _selectObserver.OnCorrectSelected -= OnGameOver;
-            
+
             _gameOverView.OnRestart -= OnRestart;
         }
     }

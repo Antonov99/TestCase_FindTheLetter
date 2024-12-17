@@ -6,7 +6,7 @@ using Zenject;
 namespace Gameplay.Task
 {
     [UsedImplicitly]
-    public class TaskPresenter:IInitializable,IDisposable
+    public class TaskPresenter : IInitializable, IDisposable
     {
         private readonly CardSystem _cardSystem;
         private readonly TaskView _taskView;

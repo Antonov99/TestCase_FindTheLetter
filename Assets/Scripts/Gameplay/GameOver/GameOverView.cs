@@ -3,15 +3,18 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gameplay.Game
+namespace Gameplay.GameOver
 {
-    public class GameOverView:MonoBehaviour
+    public class GameOverView : MonoBehaviour
     {
-        [SerializeField] private Button _restartButton;
-        [SerializeField] private Image _fadeOverlay;
+        [SerializeField]
+        private Button _restartButton;
+
+        [SerializeField]
+        private Image _fadeOverlay;
 
         public event Action OnRestart;
-        
+
         private void Start()
         {
             _restartButton.onClick.AddListener(Restart);
@@ -32,7 +35,7 @@ namespace Gameplay.Game
                 _restartButton.interactable = true;
             });
         }
-        
+
         public void Hide()
         {
             _restartButton.interactable = false;

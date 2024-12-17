@@ -9,7 +9,7 @@ namespace Gameplay.Cards
     {
         [Inject]
         private Transform _fieldOfView;
-        
+
         [Inject]
         private Card _cardPrefab;
 
@@ -18,7 +18,7 @@ namespace Gameplay.Cards
             Container.Bind<CardSpawner>().AsSingle().WithArguments(_fieldOfView).NonLazy();
             Container.BindInterfacesAndSelfTo<CardSpawnController>().AsSingle().NonLazy();
             Container.Bind<CardSystem>().AsSingle().NonLazy();
-            
+
             Container.BindMemoryPool<Card, MonoMemoryPool<Card>>()
                 .WithInitialSize(9)
                 .FromComponentInNewPrefab(_cardPrefab)

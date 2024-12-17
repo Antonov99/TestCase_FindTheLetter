@@ -1,5 +1,6 @@
 using Gameplay.Cards;
 using Gameplay.Difficulty;
+using Gameplay.GameOver;
 using Gameplay.Task;
 using UnityEngine;
 using Zenject;
@@ -22,27 +23,27 @@ namespace Gameplay.Game
         [Header("Task")]
         [SerializeField]
         private TaskView _taskView;
-        
+
         [SerializeField]
         private string _allSymbols;
-        
+
         [Header("FPS")]
         [SerializeField]
         private int _targetFPS;
-        
+
         [Header("GameOver")]
         [SerializeField]
         private GameOverView _gameOverView;
-        
+
         public override void InstallBindings()
         {
             TaskInstaller.Install(Container, _taskView, _allSymbols);
             CardInstaller.Install(Container, _cardPrefab, _fieldOfView);
             DifficultyInstaller.Install(Container, _maxDifficulty);
+            GameOverInstaller.Install(Container, _gameOverView);
 
             Container.BindInterfacesAndSelfTo<SelectObserver>().AsSingle().NonLazy();
             Container.BindInterfacesTo<FpsSetup>().AsSingle().WithArguments(_targetFPS).NonLazy();
-            Container.BindInterfacesAndSelfTo<GameOverPresenter>().AsSingle().WithArguments(_gameOverView).NonLazy();
         }
     }
 }

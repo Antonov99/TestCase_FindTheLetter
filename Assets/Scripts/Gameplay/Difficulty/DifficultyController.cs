@@ -1,11 +1,10 @@
 ﻿using Gameplay.Game;
+using System;
+using JetBrains.Annotations;
+using Zenject;
 
 namespace Gameplay.Difficulty
 {
-    using System;
-    using JetBrains.Annotations;
-    using Zenject;
-
     [UsedImplicitly]
     public class DifficultyController : IInitializable, IDisposable
     {

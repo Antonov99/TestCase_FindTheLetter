@@ -6,7 +6,7 @@ using Zenject;
 namespace Gameplay.Game
 {
     [UsedImplicitly]
-    public class SelectObserver:IInitializable, IDisposable
+    public class SelectObserver : IInitializable, IDisposable
     {
         private readonly CardSystem _cardSystem;
         public event Action OnCorrectSelected;

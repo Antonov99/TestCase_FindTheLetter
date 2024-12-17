@@ -1,8 +1,8 @@
-﻿namespace Gameplay.Difficulty
+﻿using System;
+using JetBrains.Annotations;
+
+namespace Gameplay.Difficulty
 {
-    using System;
-    using JetBrains.Annotations;
-    
     [UsedImplicitly]
     public sealed class Difficulty : IDifficulty
     {

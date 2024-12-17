@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.Task
 {
-    public class TaskView:MonoBehaviour
+    public class TaskView : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text _taskText;
@@ -12,8 +12,8 @@ namespace Gameplay.Task
         public void UpdateText(string text)
         {
             _taskText.text = text;
-            _taskText.alpha = 0; 
-            _taskText.DOFade(1, 3f); 
+            _taskText.alpha = 0;
+            _taskText.DOFade(1, 3f);
         }
     }
 }

@@ -42,8 +42,7 @@ namespace Gameplay.Cards
             do
             {
                 letterIndex = Random.Range(0, card.LettersCount);
-            } 
-            while (_activeLetters.Contains(letterIndex));
+            } while (_activeLetters.Contains(letterIndex));
 
             card.SetBackground(bgIndex);
             card.SetLetter(letterIndex);
@@ -67,6 +66,7 @@ namespace Gameplay.Cards
                 {
                     activeCard.DisableButton();
                 }
+
                 OnSelect?.Invoke(true, card);
             }
             else
