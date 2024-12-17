@@ -6,7 +6,7 @@
     [UsedImplicitly]
     public sealed class Difficulty : IDifficulty
     {
-        public event Action OnStateChanged;
+        public event Action<int> OnStateChanged;
 
         public int Current => _current;
         public int Max => _max;
@@ -21,17 +21,28 @@
 
         public bool Next(out int difficulty)
         {
-            if (_current == _max)
+            if (IsMax())
             {
                 difficulty = default;
                 return false;
             }
 
             _current++;
-            OnStateChanged?.Invoke();
+            OnStateChanged?.Invoke(_current);
 
             difficulty = _current;
             return true;
+        }
+
+        public bool IsMax()
+        {
+            return _current == _max;
+        }
+
+        public void SetDifficulty(int value)
+        {
+            _current = value;
+            OnStateChanged?.Invoke(_current);
         }
     }
 }

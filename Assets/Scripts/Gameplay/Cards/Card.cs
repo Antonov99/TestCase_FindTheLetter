@@ -26,7 +26,7 @@ namespace Gameplay.Cards
         private List<Sprite> _backgroundSprites;
 
         public int BackgroundsCount => _backgroundSprites.Count;
-        
+
         private bool _isAnimating;
 
         private int _currentIndex;
@@ -35,11 +35,18 @@ namespace Gameplay.Cards
 
         private void OnEnable()
         {
-            _button.onClick.AddListener(() => OnPressed?.Invoke(this));
-            BounceAnimation();
+            _button.interactable = true;
+            _button.onClick.AddListener(OnCardClicked);
+            SpawnBounceAnimation();
         }
 
-        private void BounceAnimation()
+        private void OnCardClicked()
+        {
+            if (_isAnimating) return;
+            OnPressed?.Invoke(this);
+        }
+
+        private void SpawnBounceAnimation()
         {
             _isAnimating = true;
             transform.localScale = Vector3.zero;
@@ -47,21 +54,42 @@ namespace Gameplay.Cards
             _isAnimating = false;
         }
 
+        public void BounceAnimation(Action onComplete = null)
+        {
+            _isAnimating = true;
+            transform.localScale = Vector3.one;
+
+            transform.DOScale(1.2f, 0.2f).SetEase(Ease.OutBounce)
+                .OnComplete(() =>
+                {
+                    transform.DOScale(0.8f, 0.2f).SetEase(Ease.OutBounce)
+                        .OnComplete(() =>
+                        {
+                            transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBounce)
+                                .OnComplete(() =>
+                                {
+                                    _isAnimating = false;
+                                    onComplete?.Invoke();
+                                });
+                        });
+                });
+        }
+
         public void ShakeAnimation()
         {
             if (_isAnimating) return;
             _isAnimating = true;
-            
+
             Vector3 originalPosition = transform.localPosition;
-            float shakeDistance = 15f; 
+            float shakeDistance = 15f;
             float shakeDuration = 0.2f;
 
             transform.DOLocalMoveX(originalPosition.x - shakeDistance, shakeDuration).SetEase(Ease.InBounce)
-                .OnComplete(() => 
+                .OnComplete(() =>
                     transform.DOLocalMoveX(originalPosition.x + shakeDistance, shakeDuration).SetEase(Ease.InBounce)
-                        .OnComplete(() => 
+                        .OnComplete(() =>
                             transform.DOLocalMove(originalPosition, shakeDuration).SetEase(Ease.InBounce)
-                            .OnComplete(() => _isAnimating = false)));
+                                .OnComplete(() => _isAnimating = false)));
         }
 
         public void SetBackground(int backgroundIndex)
@@ -75,6 +103,11 @@ namespace Gameplay.Cards
             _currentIndex = letterIndex;
         }
 
+        public void DisableButton()
+        {
+            _button.interactable = false;
+        }
+
         public int GetIndex()
         {
             return _currentIndex;
@@ -82,7 +115,7 @@ namespace Gameplay.Cards
 
         private void OnDisable()
         {
-            _button.onClick.RemoveListener(() => OnPressed?.Invoke(this));
+            _button.onClick.RemoveListener(OnCardClicked);
         }
     }
 }

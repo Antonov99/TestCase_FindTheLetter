@@ -13,7 +13,7 @@ namespace Gameplay.Task
         {
             _taskText.text = text;
             _taskText.alpha = 0; 
-            _taskText.DOFade(1, 4f); 
+            _taskText.DOFade(1, 3f); 
         }
     }
 }

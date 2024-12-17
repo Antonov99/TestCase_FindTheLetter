@@ -20,13 +20,12 @@ namespace Gameplay.Cards
         void IInitializable.Initialize()
         {
             _difficulty.OnStateChanged += OnStateChanged;
-            _difficulty.Next(out int difficulty);
         }
 
-        private void OnStateChanged()
+        private void OnStateChanged(int difficulty)
         {
             _cardSystem.DespawnCards();
-            _cardSystem.SpawnCards(_difficulty.Current * 3);
+            _cardSystem.SpawnCards(difficulty * 3);
         }
 
         void IDisposable.Dispose()

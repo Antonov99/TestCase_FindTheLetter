@@ -12,6 +12,7 @@ namespace Gameplay.Difficulty
         public override void InstallBindings()
         {
             Container.Bind<IDifficulty>().To<Difficulty>().AsSingle().WithArguments(_difficulty);
+            Container.BindInterfacesAndSelfTo<DifficultyController>().AsSingle().NonLazy();
         }
     }
 }

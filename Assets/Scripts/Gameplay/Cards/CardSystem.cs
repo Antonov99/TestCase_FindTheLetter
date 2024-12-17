@@ -62,7 +62,13 @@ namespace Gameplay.Cards
         private void CheckWin(Card card)
         {
             if (card == _targetCard)
+            {
+                foreach (var activeCard in _activeCards)
+                {
+                    activeCard.DisableButton();
+                }
                 OnSelect?.Invoke(true, card);
+            }
             else
                 OnSelect?.Invoke(false, card);
         }

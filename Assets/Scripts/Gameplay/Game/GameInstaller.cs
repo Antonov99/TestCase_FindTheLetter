@@ -30,6 +30,10 @@ namespace Gameplay.Game
         [SerializeField]
         private int _targetFPS;
         
+        [Header("GameOver")]
+        [SerializeField]
+        private GameOverView _gameOverView;
+        
         public override void InstallBindings()
         {
             TaskInstaller.Install(Container, _taskView, _allSymbols);
@@ -38,6 +42,7 @@ namespace Gameplay.Game
 
             Container.BindInterfacesAndSelfTo<SelectObserver>().AsSingle().NonLazy();
             Container.BindInterfacesTo<FpsSetup>().AsSingle().WithArguments(_targetFPS).NonLazy();
+            Container.BindInterfacesAndSelfTo<GameOverPresenter>().AsSingle().WithArguments(_gameOverView).NonLazy();
         }
     }
 }

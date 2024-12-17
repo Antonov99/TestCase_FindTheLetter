@@ -1,8 +1,6 @@
 ﻿using System;
 using Gameplay.Cards;
-using Gameplay.Difficulty;
 using JetBrains.Annotations;
-using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Game
@@ -11,12 +9,11 @@ namespace Gameplay.Game
     public class SelectObserver:IInitializable, IDisposable
     {
         private readonly CardSystem _cardSystem;
-        private readonly IDifficulty _difficulty;
+        public event Action OnCorrectSelected;
 
-        public SelectObserver(CardSystem cardSystem, IDifficulty difficulty)
+        public SelectObserver(CardSystem cardSystem)
         {
             _cardSystem = cardSystem;
-            _difficulty = difficulty;
         }
 
         void IInitializable.Initialize()
@@ -28,14 +25,10 @@ namespace Gameplay.Game
         {
             if (value)
             {
-                if (_difficulty.Next(out int difficulty))
-                    Debug.Log("OK");//animation
-                else
-                    Debug.Log("MAX");
+                card.BounceAnimation(() => OnCorrectSelected?.Invoke());
             }
             else
             {
-                Debug.Log("NOT OK");
                 card.ShakeAnimation();
             }
         }
